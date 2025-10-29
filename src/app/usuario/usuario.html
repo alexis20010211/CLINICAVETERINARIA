@@ -1,0 +1,65 @@
+<div class="usuarios-container">
+  <h1>👤 Gestión de Usuarios</h1>
+
+  <!-- Formulario solo visible para admin -->
+  <div *ngIf="esAdmin(); else soloVista">
+    <form [formGroup]="usuarioForm" (ngSubmit)="registrarUsuario()" class="usuario-form">
+      <div class="form-group">
+        <label>Nombre:</label>
+        <input formControlName="nombre" type="text" placeholder="Ingrese nombre" />
+      </div>
+
+      <div class="form-group">
+        <label>Correo:</label>
+        <input formControlName="correo" type="email" placeholder="correo@ejemplo.com" />
+      </div>
+
+      <div class="form-group">
+        <label>Contraseña:</label>
+        <input formControlName="password" type="password" placeholder="******" />
+      </div>
+
+      <div class="form-group">
+        <label>Rol:</label>
+        <select formControlName="rol">
+          <option value="admin">Administrador</option>
+          <option value="cliente">Cliente</option>
+        </select>
+      </div>
+
+      <button type="submit" [disabled]="usuarioForm.invalid">Registrar Usuario</button>
+    </form>
+  </div>
+
+  <!-- Vista para clientes -->
+  <ng-template #soloVista>
+    <p><strong>Modo Cliente:</strong> Solo puedes ver tu información.</p>
+  </ng-template>
+
+  <!-- Tabla de usuarios -->
+  <div class="tabla-usuarios">
+    <h2>📋 Lista de Usuarios</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Rol</th>
+          <th *ngIf="esAdmin()">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <td>{{ usuario.id }}</td>
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.correo }}</td>
+          <td>{{ usuario.rol }}</td>
+          <td *ngIf="esAdmin()">
+            <button class="btn-eliminar" (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+.usuarios-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 25px;
+  background: #ffffffcc;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 114, 255, 0.15);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: #0072ff;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.usuario-form {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #0072ff;
+  box-shadow: 0 0 8px rgba(0, 114, 255, 0.3);
+}
+
+button {
+  background: linear-gradient(90deg, #0072ff, #00c6ff);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+.tabla-usuarios table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.tabla-usuarios th,
+.tabla-usuarios td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.tabla-usuarios th {
+  background-color: #0072ff;
+  color: white;
+}
+
+.btn-eliminar {
+  background-color: #ff4b4b;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-eliminar:hover {
+  background-color: #e63e3e;
+}

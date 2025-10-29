@@ -1,25 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MascotasService } from './services/mascotas.service';
 import { Mascota } from './model/mascota';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-mascotas',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor],
-  templateUrl: './mascotas.html',   // Renombrado para seguir convenciones Angular
-  styleUrls: ['./mascotas.css']     // Renombrado para seguir convenciones Angular
+  imports: [ReactiveFormsModule, NgFor, NgIf],
+  templateUrl: './mascotas.html',
+  styleUrls: ['./mascotas.css']
 })
-export class MascotasComponent {
+export class MascotasComponent implements OnInit {
 
-  mascotaForm: FormGroup;
+  mascotaForm!: FormGroup;
   mascotas: Mascota[] = [];
+  usuarioActual: any = null; // ✅ Para guardar el usuario logueado
 
   constructor(
     private fb: FormBuilder,
     private mascotasService: MascotasService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
+    // ✅ Inicializar formulario
     this.mascotaForm = this.fb.group({
       nombre: ['', Validators.required],
       especie: ['', Validators.required],
@@ -29,6 +33,13 @@ export class MascotasComponent {
       telefonoDueno: ['', Validators.required]
     });
 
+    // ✅ Cargar usuario logueado desde localStorage
+    const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+    if (usuarioLogueado) {
+      this.usuarioActual = JSON.parse(usuarioLogueado);
+    }
+
+    // ✅ Cargar mascotas
     this.cargarMascotas();
   }
 
@@ -36,11 +47,31 @@ export class MascotasComponent {
     this.mascotas = this.mascotasService.getMascotas();
   }
 
-  registrar(): void {   // Función renombrada para coincidir con el HTML
+  registrar(): void {
+    if (!this.usuarioActual || this.usuarioActual.rol !== 'admin') {
+      alert('Solo el administrador puede registrar mascotas');
+      return;
+    }
+
     if (this.mascotaForm.valid) {
       this.mascotasService.agregarMascota(this.mascotaForm.value);
       this.cargarMascotas();
       this.mascotaForm.reset();
     }
+  }
+
+  eliminarMascota(id: number): void {
+    if (!this.usuarioActual || this.usuarioActual.rol !== 'admin') {
+      alert('Solo el administrador puede eliminar mascotas');
+      return;
+    }
+
+    this.mascotasService.eliminarMascota(id);
+    this.cargarMascotas();
+  }
+
+  // ✅ Mostrar si el usuario actual es admin
+  esAdmin(): boolean {
+    return this.usuarioActual && this.usuarioActual.rol === 'admin';
   }
 }

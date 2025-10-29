@@ -1,1 +1,45 @@
-<p>home works!</p>
+<div class="home-container">
+  <!-- Sección de bienvenida -->
+  <section class="welcome-section">
+    <div class="welcome-text">
+      <h1>Bienvenido a <span>Clínica VetClinic</span></h1>
+      <p>Gestiona tus mascotas, agenda citas fácilmente y consulta su historial de atención.</p>
+      <button routerLink="/mascotas" class="primary-btn">Comenzar</button>
+    </div>
+    <div class="welcome-image">
+      <img src="assets/home-pet.png" alt="Mascotas felices">
+    </div>
+  </section>
+
+  <!-- Accesos rápidos -->
+  <section class="quick-access">
+    <h2>Accesos rápidos</h2>
+    <div class="access-cards">
+      <div class="card" routerLink="/mascotas">
+        <img src="assets/icon-mascotas.svg" alt="Mascotas">
+        <h3>Mascotas</h3>
+        <p>Registra y visualiza todas tus mascotas.</p>
+      </div>
+      <div class="card" routerLink="/citas">
+        <img src="assets/icon-citas.svg" alt="Citas">
+        <h3>Citas</h3>
+        <p>Agendar y revisar tus citas de manera rápida.</p>
+      </div>
+      <div class="card" routerLink="/historial">
+        <img src="assets/icon-historial.svg" alt="Historial">
+        <h3>Historial</h3>
+        <p>Consulta el historial de atención de tus mascotas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de tips o novedades -->
+  <section class="tips-section">
+    <h2>Tips de cuidado para tus mascotas</h2>
+    <ul>
+      <li>Vacuna a tus mascotas a tiempo.</li>
+      <li>Alimenta de manera balanceada según su especie.</li>
+      <li>Visita al veterinario regularmente.</li>
+    </ul>
+  </section>
+</div>

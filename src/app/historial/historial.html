@@ -1,1 +1,58 @@
-<p>historial works!</p>
+<div class="historial-container">
+  <h2 class="titulo-principal">📋 Historial de Atención</h2>
+
+  <!-- Lista de mascotas -->
+  <div class="mascotas-lista">
+    <h3>🐶 Selecciona una mascota</h3>
+    <ul>
+      <li
+        *ngFor="let mascota of mascotas"
+        (click)="verHistorial(mascota.id)"
+        [class.seleccionada]="selectedMascota?.id === mascota.id"
+        class="mascota-item"
+      >
+        <div class="mascota-info">
+          <span class="emoji">🐾</span>
+          <div>
+            <strong>{{ mascota.nombre }}</strong>
+            <p class="detalle">{{ mascota.especie }} — {{ mascota.raza }}</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Detalle del historial -->
+  <div *ngIf="selectedMascota" class="historial-detalle">
+    <h3 class="subtitulo">
+      🩺 Historial de <span>{{ selectedMascota.nombre }}</span>
+    </h3>
+
+    <div *ngIf="historial.length > 0; else sinCitas" class="tabla-contenedor">
+      <table class="tabla-historial table table-hover table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>📅 Fecha</th>
+            <th>💬 Motivo</th>
+            <th>👨‍⚕️ Veterinario</th>
+            <th>📝 Observaciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cita of historial" [class.proxima-cita]="cita.proxima">
+            <td>{{ cita.fecha | date:'shortDate' }}</td>
+            <td>{{ cita.motivo }}</td>
+            <td>{{ cita.veterinario }}</td>
+            <td>{{ cita.observaciones || 'Sin observaciones' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #sinCitas>
+      <div class="alert alert-warning text-center">
+        ⚠️ No hay citas registradas para esta mascota.
+      </div>
+    </ng-template>
+  </div>
+</div>

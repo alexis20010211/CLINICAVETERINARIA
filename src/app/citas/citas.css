@@ -1,0 +1,71 @@
+.citas-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7f9fc;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+  text-align: center;
+  color: #2c3e50;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #34495e;
+}
+
+input, select, button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #bdc3c7;
+  font-size: 14px;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #2980b9;
+}
+
+.citas-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.citas-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background-color: #ecf0f1;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  align-items: center;
+}

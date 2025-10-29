@@ -1,54 +1,146 @@
-/* login.css */
-
-/* Contenedor del formulario */
-form {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 30px;
-  background-color: #f2f9f5; /* color suave para veterinaria */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+/* 🌈 Contenedor general */
+.login-container {
   display: flex;
-  flex-direction: column;
+  align-items: center;              /* Centra verticalmente */
+  justify-content: center;          /* Centra horizontalmente */
+  height: 100vh;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  overflow: hidden;
+  position: relative;
 }
 
-/* Títulos */
-h2 {
+/* 🩵 Fondo decorativo */
+.login-background {
+  position: absolute;
+  inset: 0;
+  background: url('https://images.unsplash.com/photo-1605902711622-cfb43c4430f0?auto=format&fit=crop&w=1400&q=80')
+    no-repeat center center / cover;
+  filter: blur(6px) brightness(0.8);
+  z-index: 0;
+}
+
+/* 💎 Card del login (efecto cristalino) */
+.login-card {
+  width: 90%;
+  max-width: 420px;
+  background: rgba(6, 221, 157, 0.849);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 45px 35px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+  animation: fadeInUp 0.7s ease;
+}
+
+/* ✨ Encabezado */
+.login-header h1 {
+  color: #ffffff;
   text-align: center;
-  color: #2c3e50;
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.login-header p {
+  text-align: center;
+  color: #e2e2e2;
+  font-size: 0.95rem;
+  margin-bottom: 25px;
+}
+
+/* 🔹 Inputs */
+.input-group {
   margin-bottom: 20px;
-  font-family: Arial, sans-serif;
 }
 
-/* Etiquetas */
-label {
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #34495e;
+.input-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #fff;
+  letter-spacing: 0.3px;
 }
 
-/* Inputs */
-input[type="text"],
-input[type="password"] {
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 16px;
+.input-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
-/* Botón */
-button {
+.input-group input::placeholder {
+  color: #e2e2e2;
+}
+
+.input-group input:focus {
+  border-color: #00c6ff;
+  box-shadow: 0 0 10px rgba(0, 198, 255, 0.5);
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* 🧠 Botón de inicio */
+.btn-login {
+  width: 100%;
   padding: 12px;
-  background-color: #27ae60; /* verde llamativo veterinaria */
-  color: white;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #0072ff, #00c6ff);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  margin-top: 5px;
 }
 
-button:hover {
-  background-color: #219150;
+.btn-login:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 198, 255, 0.5);
+}
+
+/* 🔗 Enlace de contraseña */
+.forgot-password {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.forgot-password a {
+  color: #e2e2e2;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.forgot-password a:hover {
+  color: #00c6ff;
+  text-decoration: underline;
+}
+
+/* 💫 Animación suave */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Responsive */
+@media screen and (max-width: 768px) {
+  .login-card {
+    padding: 35px 25px;
+    backdrop-filter: blur(14px);
+  }
 }
