@@ -1,0 +1,20 @@
+<h2>Registro de Mascotas</h2>
+
+<form [formGroup]="mascotaForm" (ngSubmit)="registrar()">
+  <input formControlName="nombre" placeholder="Nombre">
+  <input formControlName="especie" placeholder="Especie">
+  <input formControlName="raza" placeholder="Raza">
+  <input type="number" formControlName="edad" placeholder="Edad">
+  <input formControlName="nombreDueno" placeholder="Nombre del dueño">
+  <input formControlName="telefonoDueno" placeholder="Teléfono del dueño">
+  <button type="submit">Registrar Mascota</button>
+</form>
+
+<hr>
+
+<h2>Lista de Mascotas</h2>
+<ul>
+  <li *ngFor="let m of mascotas">
+    {{ m.nombre }} - {{ m.especie }} - Dueño: {{ m.nombreDueno }} - Tel: {{ m.telefonoDueno }}
+  </li>
+</ul>
