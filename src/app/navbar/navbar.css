@@ -1,0 +1,77 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 0.8rem 2rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1rem; /* base para elementos relativos */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.logo-img {
+  height: 1.5em; /* altura relativa al font-size del logo */
+  width: auto;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: #1abc9c;
+}
+
+.nav-actions button {
+  background-color: #1abc9c;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.3s;
+}
+
+.nav-actions button:hover {
+  background-color: #16a085;
+}
+
+/* Responsive básico */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  .nav-actions button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+  .logo-img {
+    height: 1.3em; /* un poco más pequeño en móvil */
+  }
+}

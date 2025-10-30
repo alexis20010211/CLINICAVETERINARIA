@@ -1,14 +1,15 @@
-// src/app/app.component.ts
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.html',
-  styleUrls: ['./app.css'],
   standalone: true,
-  imports: [RouterModule]  // Necesario para <router-outlet>
+  imports: [CommonModule, RouterOutlet, NavbarComponent],
+  template: `
+    <app-navbar></app-navbar>
+    <router-outlet></router-outlet>
+  `
 })
-export class AppComponent {
-  title = 'Clínica Veterinaria';
-}
+export class AppComponent {}

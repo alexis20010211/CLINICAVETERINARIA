@@ -1,4 +1,7 @@
 import { Routes } from '@angular/router';
+
+// Componentes
+import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MascotasComponent } from './mascotas/mascotas.component';
@@ -7,25 +10,42 @@ import { HistorialComponent } from './historial/historial.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { HomeComponent } from './home/home.component';
 
+// Guards
+import { AuthGuard } from './auth/auth.guard';
+import { RoleGuard } from './auth/role.guard';
+
 export const routes: Routes = [
+  // Landing público
+  { path: '', component: LandingComponent },
+
   // Ruta pública de login
   { path: 'login', component: LoginComponent },
 
-  // Dashboard: contenedor para todas las secciones
+  // Dashboard: contenedor para todas las secciones protegidas
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard], // Protege todo el dashboard
     children: [
-      { path: 'home', component: HomeComponent },           // Página principal
-      { path: 'mascotas', component: MascotasComponent },   // Gestión de mascotas
-      { path: 'citas', component: CitasComponent },         // Gestión de citas
-      { path: 'historial', component: HistorialComponent }, // Historial de mascotas/citas
-      { path: 'usuarios', component: UsuarioComponent },    // Gestión de usuarios (solo admin)
-      { path: '', redirectTo: 'home', pathMatch: 'full' },  // Por defecto al dashboard
+      // Cliente y Admin pueden ver home
+      { 
+        path: 'home', 
+        component: HomeComponent, 
+        canActivate: [RoleGuard], 
+        data: { roles: ['cliente', 'admin'] } 
+      },
+
+      // Solo Admin puede acceder
+      { path: 'mascotas', component: MascotasComponent, canActivate: [RoleGuard], data: { roles: ['admin'] } },
+      { path: 'citas', component: CitasComponent, canActivate: [RoleGuard], data: { roles: ['admin'] } },
+      { path: 'historial', component: HistorialComponent, canActivate: [RoleGuard], data: { roles: ['admin'] } },
+      { path: 'usuarios', component: UsuarioComponent, canActivate: [RoleGuard], data: { roles: ['admin'] } },
+
+      // Ruta por defecto dentro del dashboard
+      { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
   },
 
-  // Redirecciones
-  { path: '', redirectTo: 'login', pathMatch: 'full' },    // Inicio de sesión por defecto
-  { path: '**', redirectTo: 'login' }                     // Cualquier ruta no encontrada va a login
+  // Redirección por seguridad (cualquier ruta no encontrada)
+  { path: '**', redirectTo: '' } // Redirige a landing
 ];

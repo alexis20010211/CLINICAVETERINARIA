@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule, DatePipe, NgForOf, NgIf } from '@angular/common';
 import { MascotasService } from '../mascotas/services/mascotas.service';
 import { CitasService } from '../citas/service/citas.service';
 import { Mascota } from '../mascotas/model/mascota';
@@ -8,7 +8,12 @@ import { Cita } from '../citas/model/cita';
 @Component({
   selector: 'app-historial',
   standalone: true,
-  imports: [CommonModule, DatePipe],
+  imports: [
+    CommonModule,
+    NgForOf,   // Para *ngFor
+    NgIf,      // Para *ngIf y ngIfElse
+    DatePipe
+  ],
   templateUrl: './historial.html',
   styleUrls: ['./historial.css']
 })

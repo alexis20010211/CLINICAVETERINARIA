@@ -7,9 +7,9 @@ import { USUARIOS_DATA } from '../../data/usuarios.data';
 @Component({
   selector: 'app-login',
   standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.html',
-  styleUrls: ['./login.css'],
-  imports: [CommonModule, FormsModule]
+  styleUrls: ['./login.css']
 })
 export class LoginComponent {
   correo: string = '';
@@ -25,11 +25,19 @@ export class LoginComponent {
     );
 
     if (usuario) {
-      // Guarda el usuario logueado en localStorage
+      // Guarda el token simulado y el rol del usuario
+      localStorage.setItem('token', 'fake-jwt-token'); 
+      localStorage.setItem('role', usuario.rol); // 'admin' o 'cliente'
+
+      // Guarda info del usuario (opcional)
       localStorage.setItem('usuario', JSON.stringify(usuario));
 
-      // Redirige al Dashboard
-      this.router.navigate(['/dashboard']);
+      // Redirige según rol
+      if (usuario.rol === 'admin') {
+        this.router.navigate(['/dashboard/mascotas']);
+      } else {
+        this.router.navigate(['/dashboard/home']);
+      }
     } else {
       this.error = 'Correo o contraseña incorrectos';
       this.correo = '';

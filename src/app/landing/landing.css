@@ -1,0 +1,163 @@
+/* -------------------- Variables -------------------- */
+:root {
+  --primary-color: #1abc9c;
+  --primary-color-dark: #16a085;
+  --text-white: #fff;
+  --text-dark: #333;
+  --shadow-card: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* -------------------- Landing / Hero -------------------- */
+.landing-container {
+  position: relative;
+  width: 100%;
+  margin-top: 70px;
+  overflow: hidden;
+}
+
+.video-bg {
+  position: absolute; top:0; left:0;
+  width: 100%; height: 100%;
+  object-fit: cover; z-index: 0;
+  
+}
+
+.overlay {
+  position: absolute; top:0; left:0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.35);
+  z-index: 1;
+}
+
+.landing-content {
+  position: relative; z-index:2;
+  color: var(--text-white);
+  text-align: center;
+  padding: 2rem;
+  max-width: 600px; margin:0 auto;
+  display: flex; flex-direction: column;
+  justify-content: center; height: 100%;
+}
+
+.landing-content h1 { font-size: 2.5rem; margin-bottom:1rem; text-shadow:2px2px8px rgba(0,0,0,0.7); }
+.landing-content h2 { margin:1rem 0 2rem; font-weight:400; text-shadow:1px1px6px rgba(0,0,0,0.6);}
+.landing-content p, .landing-content .info { font-size:1.1rem; text-shadow:1px1px4px rgba(0,0,0,0.6); margin-bottom:1.5rem;}
+
+.landing-content form {
+  display:flex; flex-direction:column; gap:1rem;
+}
+.landing-content form input, 
+.landing-content form button {
+  padding:0.8rem; border-radius:5px; border:none; font-size:1rem;
+}
+.landing-content form button {
+  background-color: var(--primary-color); color: var(--text-white); cursor:pointer; transition:0.3s;
+}
+.landing-content form button:hover { background-color: var(--primary-color-dark); }
+
+/* -------------------- Tarjeta Registro/Login flotante -------------------- */
+.login-card {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.95);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  z-index: 10;
+  max-width: 250px;
+  text-align: center;
+  color: #333;
+  animation: slideIn 1s ease-out;
+}
+
+.login-card h3 {
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.login-card p {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.login-card .buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login-card .buttons button {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--primary-color);
+  color: var(--text-white);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.login-card .buttons button:hover {
+  background-color: var(--primary-color-dark);
+}
+.login-card .buttons span { margin: 0.5rem 0; font-weight:600; }
+
+/* Animación */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-50%) translateX(100px); }
+  to { opacity: 1; transform: translateY(-50%) translateX(0); }
+}
+
+/* -------------------- Cards y Hover general -------------------- */
+.card, .service-card, .team-card, .testimonial-item {
+  border-radius: 10px; box-shadow: var(--shadow-card); background:#fff;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover, .service-card:hover, .team-card:hover, .testimonial-item:hover {
+  transform: scale(1.05); box-shadow:0 5px 25px rgba(0,0,0,0.2);
+}
+
+/* -------------------- Secciones -------------------- */
+section { padding:4rem 2rem; text-align:center; }
+.testimonials, .services, .contact { background:#f8f8f8; }
+.testimonials h2, .services h2, .team h2, .contact h2 { font-size:2rem; margin-bottom:1rem; color: var(--text-dark); }
+.testimonials h4 { margin:1rem 0 2rem; color:#555; }
+
+.service-cards, .team-cards, .carousel-track, .testimonial-track {
+  display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;
+}
+.service-card, .team-card, .testimonial-item { padding:1.5rem; min-width:250px; max-width:300px; }
+
+/* Carousel horizontal */
+.horizontal-carousel, .testimonial-carousel {
+  overflow-x:auto; scroll-behavior:smooth; padding:1rem 0;
+}
+.horizontal-carousel::-webkit-scrollbar, .testimonial-carousel::-webkit-scrollbar { display:none; }
+
+/* Carousel imágenes */
+.carousel-item { flex:0 0 auto; width:200px; height:150px; overflow:hidden; border-radius:10px; }
+.carousel-item img { width:100%; height:100%; object-fit:cover; }
+
+/* Texto testimonios */
+.testimonial-item p { font-size:1rem; color:#333; margin-bottom:0.5rem; }
+.testimonial-item small { color: var(--primary-color); font-weight:600; }
+
+/* Botones de cards */
+.service-card button { background-color:var(--primary-color); color:#fff; border:none; border-radius:5px; padding:0.6rem 1rem; cursor:pointer; transition:0.3s; }
+.service-card button:hover { background-color: var(--primary-color-dark); }
+
+/* -------------------- Responsive -------------------- */
+@media (max-width:768px){
+  .landing-content h1{ font-size:2rem;}
+  .landing-content h2{ font-size:1.5rem;}
+  section h2{ font-size:1.5rem;}
+  .team-cards, .service-cards { flex-direction:column; }
+  .carousel-item{ width:150px; height:120px; }
+  .testimonial-item{ min-width:250px; max-width:250px; }
+  .login-card {
+    right: 50%;
+    top: 60%;
+    transform: translate(50%, -50%);
+    max-width: 80%;
+  }
+}

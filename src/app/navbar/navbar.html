@@ -1,0 +1,28 @@
+<nav class="navbar">
+  <!-- Logo -->
+  <div class="nav-logo">
+    <img src="assets/images/logo.png" alt="VetClinic" class="logo-img">
+    <span>VetClinic</span>
+  </div>
+
+  <!-- Links principales públicos -->
+  <ul class="nav-links">
+    <li><a routerLink="/home" routerLinkActive="active">Inicio</a></li>
+    <li><a routerLink="/promos" routerLinkActive="active">Promos</a></li>
+    <li><a routerLink="/servicios" routerLinkActive="active">Servicios</a></li>
+    <li><a routerLink="/equipo" routerLinkActive="active">Equipo</a></li>
+    <li><a routerLink="/contacto" routerLinkActive="active">Contacto</a></li>
+
+    <!-- Links privados: solo para usuarios logueados -->
+    <li *ngIf="esAdmin()"><a routerLink="/dashboard/usuarios" routerLinkActive="active">Usuarios</a></li>
+    <li *ngIf="isLoggedIn()"><a routerLink="/dashboard/mascotas" routerLinkActive="active">Mascotas</a></li>
+    <li *ngIf="isLoggedIn()"><a routerLink="/dashboard/citas" routerLinkActive="active">Citas</a></li>
+    <li *ngIf="isLoggedIn()"><a routerLink="/dashboard/historial" routerLinkActive="active">Historial</a></li>
+  </ul>
+
+  <!-- Login / Logout -->
+  <div class="nav-actions">
+    <button *ngIf="!isLoggedIn()" (click)="login()">Login</button>
+    <button *ngIf="isLoggedIn()" (click)="logout()">Cerrar sesión</button>
+  </div>
+</nav>

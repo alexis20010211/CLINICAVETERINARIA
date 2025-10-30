@@ -9,15 +9,16 @@ import { Mascota } from '../mascotas/model/mascota';
 @Component({
   selector: 'app-citas',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgFor, NgIf],
   templateUrl: './citas.html',
-  styleUrls: ['./citas.css']
+  styleUrls: ['./citas.css'],
+  imports: [CommonModule, ReactiveFormsModule, NgIf, NgFor]
 })
 export class CitasComponent implements OnInit {
+
   citaForm!: FormGroup;
   citas: Cita[] = [];
   mascotas: Mascota[] = [];
-  usuarioActual: any = null; // ✅ Usuario logueado
+  usuarioActual: any = null; // Usuario logueado
 
   constructor(
     private fb: FormBuilder,
@@ -26,51 +27,62 @@ export class CitasComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Cargar usuario desde localStorage
+    // ✅ Cargar usuario logueado desde localStorage
     const usuarioLogueado = localStorage.getItem('usuario');
-    if (usuarioLogueado) this.usuarioActual = JSON.parse(usuarioLogueado);
+    if (usuarioLogueado) {
+      this.usuarioActual = JSON.parse(usuarioLogueado);
+    }
 
-    // Obtener mascotas y citas
+    // ✅ Cargar datos iniciales
     this.mascotas = this.mascotasService.getMascotas();
     this.citas = this.citasService.getCitas();
 
-    // Inicializar formulario
+    // ✅ Inicializar formulario reactivo
     this.citaForm = this.fb.group({
       mascotaId: ['', Validators.required],
       fecha: ['', Validators.required],
-      hora: ['', Validators.required]
+      hora: ['', Validators.required],
     });
   }
 
+  // ✅ Verifica si el usuario es administrador
   esAdmin(): boolean {
-    return this.usuarioActual && this.usuarioActual.rol === 'admin';
+    return this.usuarioActual?.rol === 'admin';
   }
 
+  // ✅ Registrar nueva cita (solo admin)
   agendarCita(): void {
     if (!this.esAdmin()) {
       alert('Solo el administrador puede agendar citas.');
       return;
     }
+
     if (this.citaForm.valid) {
       const nuevaCita: Omit<Cita, 'id'> = {
         ...this.citaForm.value,
         duenoId: this.usuarioActual.id
       };
+
       this.citasService.agregarCita(nuevaCita);
-      this.citas = this.citasService.getCitas();
+      this.citas = this.citasService.getCitas(); // Actualiza la lista
       this.citaForm.reset();
+    } else {
+      alert('Por favor completa correctamente el formulario.');
     }
   }
 
+  // ✅ Eliminar cita (solo admin)
   eliminarCita(id: number): void {
     if (!this.esAdmin()) {
       alert('Solo el administrador puede eliminar citas.');
       return;
     }
+
     this.citasService.eliminarCita(id);
-    this.citas = this.citasService.getCitas();
+    this.citas = this.citasService.getCitas(); // Refresca lista
   }
 
+  // ✅ Obtener nombre de mascota por id
   getMascotaNombre(id: number): string {
     const mascota = this.mascotas.find(m => m.id === id);
     return mascota ? mascota.nombre : 'Desconocida';

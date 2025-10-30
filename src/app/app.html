@@ -1,16 +1,10 @@
-<header class="header">
-  <div class="brand">
-    <img src="assets/images/logo.png" alt="Logo Clínica" class="logo">
-    <h1 class="brand-name">VetClinic</h1>
-  </div>
-
-  <nav class="nav">
-    <a routerLink="/home" routerLinkActive="active">Inicio</a>
-    <a routerLink="/citas" routerLinkActive="active">Citas</a>
-    <a routerLink="/historial" routerLinkActive="active">Historial</a>
-    <a routerLink="/login" routerLinkActive="active">Login</a>
-  </nav>
-</header>
-
-<!-- Aquí Angular renderiza el componente activo según la ruta -->
+<!-- app.component.html -->
+<!-- 
+Este archivo ahora solo actúa como contenedor principal.
+Angular mostrará aquí el componente correspondiente a cada ruta.
+Por ejemplo:
+ - LandingComponent en "/"
+ - LoginComponent en "/login"
+ - DashboardComponent en "/dashboard"
+--><app-navbar></app-navbar> <!-- Navbar global -->
 <router-outlet></router-outlet>

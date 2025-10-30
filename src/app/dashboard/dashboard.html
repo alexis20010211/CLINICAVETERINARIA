@@ -1,9 +1,74 @@
-<nav>
-  <a routerLink="home">Home</a>
-  <a routerLink="mascotas">Mascotas</a>
-  <a routerLink="citas">Citas</a>
-  <a routerLink="historial">Historial</a>
-  <a *ngIf="esAdmin()" routerLink="usuarios">Usuarios</a>
+<!-- dashboard.html -->
+
+<h1 class="titulo">Bienvenido, {{ usuario?.nombre }}</h1>
+<p class="rol">Rol: {{ usuario?.rol }}</p>
+
+<!-- Navegación -->
+<nav class="menu">
+  <a routerLink="mascotas" class="btn-nav">Mascotas</a>
+  <a routerLink="citas" class="btn-nav">Citas</a>
+  <a routerLink="historial" class="btn-nav">Historial</a>
+  <ng-container *ngFor="let seccion of seccionesAdmin">
+    <a routerLink="{{ seccion.ruta }}" class="btn-nav">{{ seccion.nombre }}</a>
+  </ng-container>
 </nav>
 
-<router-outlet></router-outlet>
+<!-- Resumen en tarjetas -->
+<div class="resumen-tarjetas">
+  <div class="tarjeta resumen-mascotas">
+    <h3>Mascotas</h3>
+    <p>{{ resumen.mascotas }}</p>
+    <button class="btn-detalle" routerLink="mascotas">Ver detalles</button>
+  </div>
+
+  <div class="tarjeta resumen-citas">
+    <h3>Citas hoy</h3>
+    <p>{{ resumen.citasHoy }}</p>
+    <button class="btn-detalle" routerLink="citas">Ver detalles</button>
+  </div>
+
+  <div class="tarjeta resumen-ingresos" *ngIf="esAdmin()">
+    <h3>Ingresos mes</h3>
+    <p>{{ resumen.ingresosMes | currency:'PEN':'symbol':'1.0-0' }}</p>
+    <button class="btn-detalle" routerLink="ingresos">Ver detalles</button>
+  </div>
+
+  <div class="tarjeta resumen-usuarios" *ngIf="esAdmin()">
+    <h3>Usuarios</h3>
+    <p>{{ resumen.usuarios }}</p>
+    <button class="btn-detalle" routerLink="usuarios">Ver detalles</button>
+  </div>
+</div>
+
+<!-- Sección de gestión en tarjetas -->
+<div class="gestion">
+  <div class="gestion-tarjeta gestion-mascotas">
+    <h2>Gestión de Mascotas</h2>
+    <p>Agrega, edita o elimina mascotas.</p>
+    <button class="btn-gestion" routerLink="mascotas">Ir a Lista de Mascotas</button>
+  </div>
+
+  <div class="gestion-tarjeta gestion-citas">
+    <h2>Gestión de Citas</h2>
+    <p>Administra todas las citas registradas.</p>
+    <button class="btn-gestion" routerLink="citas">Ir a Citas</button>
+  </div>
+
+  <div class="gestion-tarjeta gestion-historial">
+    <h2>Gestión de Historial</h2>
+    <p>Consulta el historial de atención de cada mascota.</p>
+    <button class="btn-gestion" routerLink="historial">Ir a Historial</button>
+  </div>
+
+  <div class="gestion-tarjeta gestion-ingresos" *ngIf="esAdmin()">
+    <h2>Gestión de Ingresos</h2>
+    <p>Revisa los ingresos mensuales de la clínica.</p>
+    <button class="btn-gestion" routerLink="ingresos">Ir a Ingresos</button>
+  </div>
+
+  <div class="gestion-tarjeta gestion-usuarios" *ngIf="esAdmin()">
+    <h2>Gestión de Usuarios</h2>
+    <p>Administra cuentas de clientes y personal.</p>
+    <button class="btn-gestion" routerLink="usuarios">Ir a Usuarios</button>
+  </div>
+</div>
